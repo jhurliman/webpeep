@@ -88,11 +88,12 @@ class HackerNewsAuralizer extends IAuralizer {
         for (let signal in sorted) {
           const array = sorted[signal]
           if (!array.length) continue
+          const denominator = (signal === 'job' || signal === 'poll') ? 2 : items.length
 
           signals.push({
             type: SignalType.EVENT,
             signal: signal,
-            intensity: array.length / items.length,
+            intensity: array.length / denominator,
             hash: array.length
           })
         }
