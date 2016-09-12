@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Webpeep</title>
+  <meta name="description" content="Web/JavaScript port of the Peep Network Auralizer">
+  <meta name="author" content="John Hurliman">
+</head>
+
+<body>
+  <div class="mute-div" style="position: absolute; top: 50px; right: 40px; width: 32px; height: 32px; cursor: pointer;">
+    <img alt="Mute" title="Mute" id="mute-button" src="img/volume-unmute.png" style="position: absolute; top: 0; left: 0; width: 32px; height: 32px; cursor: pointer;">
+    <img alt="Unmute" title="Unmute" id="unmute-button" src="img/volume-mute.png" style="position: absolute; top: 0; left: 0; width: 32px; height: 32px; cursor: pointer; display: none;">
+  </div>
+
+  <script src="src/mersenne-twister.js"></script>
+  <script src="src/lru-cache.js"></script>
+  <script src="src/utils.js"></script>
+
+  <script src="src/library-parser.js"></script>
+  <script src="src/audio-resource.js"></script>
+  <script src="src/audio-library.js"></script>
+
+  <script src="src/isound.js"></script>
+  <script src="src/event-sound.js"></script>
+  <script src="src/heartbeat-sound.js"></script>
+  <script src="src/state-sound.js"></script>
+
+  <script src="src/iauralizer.js"></script>
+  <script src="src/hacker-news-auralizer.js"></script>
+  <!-- <script src="src/random-auralizer.js"></script> -->
+
+  <script src="src/isignal-mapper.js"></script>
+  <script src="src/random-signal-mapper.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+
+  <script src="src/index.js"></script>
+</body>
+</html>
