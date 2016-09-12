@@ -17,6 +17,11 @@ class StateSound extends ISound {
     })
     this.sources = []
     this.timer = null
+
+    // Create a shared gain node for this StateSound so we can adjust intensity
+    // without touching fade-in / fade-out curves
+    this.stateGain = audioCtx.createGain()
+    this.stateGain.connect(audioCtx.masterVolume)
   }
 
   load () {
@@ -35,10 +40,7 @@ class StateSound extends ISound {
       this.sources.shift()
 
     // Cancel and remove upcoming scheduled segments
-    this.sources.slice(1).forEach(source => {
-      source.gainNode.gain.cancelScheduledValues(0)
-      source.stop(0)
-    })
+    this.sources.slice(1).forEach(source => source.stop(0))
     this.sources = this.sources.slice(0, 1)
 
     let curSource = this.sources[0]
@@ -47,17 +49,20 @@ class StateSound extends ISound {
       const curSegment = this.nextSegment()
       if (!curSegment) return console.warn(`Did not play StateSound ${this.name}, no loaded segments`)
 
-      curSource = StateSound.playWithCrossfade(this.audioCtx, curSegment, 0, intensity)
+      curSource = this.playWithCrossfade(curSegment, 0, intensity)
       this.sources.push(curSource)
-    } else if (curSource.gain !== intensity) {
+    } else if (this.stateGain.gain.value !== intensity) {
       // Change the volume of the current playing segment
-      StateSound.changeVolume(this.audioCtx, curSource, intensity)
+      const sharedGain = this.stateGain.gain
+      sharedGain.cancelScheduledValues(curTime)
+      sharedGain.setValueAtTime(sharedGain.value, curTime)
+      sharedGain.linearRampToValueAtTime(intensity, curTime + StateSound.VOLUME_CHANGE_TIME)
     }
 
     // Schedule the next segment for playback
     const nextSegment = this.nextSegment()
     const offset = Math.max(0.1, curSource.endTime - curTime - StateSound.FADE_TIME)
-    const nextSource = StateSound.playWithCrossfade(this.audioCtx, nextSegment, offset, intensity)
+    const nextSource = this.playWithCrossfade(nextSegment, offset, intensity)
     this.sources.push(nextSource)
 
     // Run this method again right after the current segment finishes to
@@ -80,49 +85,31 @@ class StateSound extends ISound {
     return curSegment
   }
 
-  static playWithCrossfade (audioCtx, segment, offset, gain) {
-    const curTime = audioCtx.currentTime
+  playWithCrossfade (segment, offset, gain) {
+    const curTime = this.audioCtx.currentTime
     const duration = segment.audio.duration
 
-    const source = audioCtx.createBufferSource()
+    const source = this.audioCtx.createBufferSource()
     source.buffer = segment.audio
 
-    const fadeIn = Utils.fadeInCurve(gain)
-    const fadeOut = Utils.fadeOutCurve(gain)
-    const gainNode = audioCtx.createGain()
-    gainNode.gain.setValueCurveAtTime(fadeIn, curTime + offset, StateSound.FADE_TIME)
-    gainNode.gain.setValueCurveAtTime(fadeOut, curTime + offset + duration - StateSound.FADE_TIME, StateSound.FADE_TIME)
+    // Create a gain node with fade-in / fade-out curves
+    const fadeInTime = curTime + offset
+    const fadeOutTime = curTime + offset + duration - StateSound.FADE_TIME
+    const gainNode = this.audioCtx.createGain()
+    gainNode.gain.setValueCurveAtTime(Utils.FADE_IN, fadeInTime, StateSound.FADE_TIME)
+    gainNode.gain.setValueCurveAtTime(Utils.FADE_OUT, fadeOutTime, StateSound.FADE_TIME)
 
     source.connect(gainNode)
-    gainNode.connect(audioCtx.masterVolume)
+    gainNode.connect(this.stateGain)
 
     source.start(curTime + offset)
     source.stop(curTime + offset + duration)
 
-    source.gain = gain
-    source.gainNode = gainNode
     source.segment = segment
     source.endTime = curTime + offset + duration
     return source
   }
-
-  static changeVolume (audioCtx, source, gain) {
-    const curTime = audioCtx.currentTime
-    const fadeOutStart = source.endTime - StateSound.FADE_TIME
-    if (curTime >= fadeOutStart) return
-
-    // Create a linear ramp from the current gain to target gain. Make sure the
-    // volume change completes before we start fade-out
-    const gainNode = source.gainNode
-    const linearRampEnd = Math.min(fadeOutStart, curTime + StateSound.FADE_TIME)
-    gainNode.gain.cancelScheduledValues(0)
-    gainNode.gain.setValueAtTime(gainNode.gain.value, curTime)
-    gainNode.gain.linearRampToValueAtTime(gain, linearRampEnd)
-
-    // Rebuild the fade-out curve to start from the target gain
-    const fadeOut = Utils.fadeOutCurve(gain)
-    gainNode.gain.setValueCurveAtTime(fadeOut, fadeOutStart, StateSound.FADE_TIME)
-  }
 }
 
 StateSound.FADE_TIME = 1.0
+StateSound.VOLUME_CHANGE_TIME = 3.0

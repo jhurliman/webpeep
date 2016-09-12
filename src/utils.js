@@ -1,13 +1,5 @@
 
 class Utils {
-  static fadeInCurve (targetGain) {
-    return new Float32Array(4096).map((_, i) => Math.cos((1 - i / 4096) * 0.5 * Math.PI) * targetGain)
-  }
-
-  static fadeOutCurve (sourceGain) {
-    return new Float32Array(4096).map((_, i) => Math.cos((i / 4096) * 0.5 * Math.PI) * sourceGain)
-  }
-
   static fileExtension (path) {
     const match = path.match(/\.[^.]+$/)
     return match ? match[0] : undefined
@@ -57,7 +49,12 @@ class Utils {
   }
 }
 
+// Shared pseudo-random number generator
 Utils.prng = new MersenneTwister()
+
+// Equal power crossfade curves
+Utils.FADE_IN = new Float32Array(4096).map((_, i) => Math.cos((1 - i / 4096) * 0.5 * Math.PI))
+Utils.FADE_OUT = new Float32Array(4096).map((_, i) => Math.cos((i / 4096) * 0.5 * Math.PI))
 
 // Shims
 
