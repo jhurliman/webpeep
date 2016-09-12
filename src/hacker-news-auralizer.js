@@ -9,40 +9,49 @@ class HackerNewsAuralizer extends IAuralizer {
     this.hn = firebase.initializeApp(config, 'hackernews').database().ref('v0')
     this.itemCache = new LRUCache({ capacity: 1000 })
     this.prng = new MersenneTwister()
+    this.topStories = null
+    this.bestStories = null
 
     const HOUR_MS = 1000 * 60 * 60
 
     this.hn.child('newstories').on('value', snapshot => {
       const now = Date.now()
 
-      this.signal(SignalType.EVENT, 'newstories', 0.5)
-
       const itemIDs = snapshot.val()
       if (!itemIDs || !itemIDs.length) return
+
+      this.signal(SignalType.EVENT, 'newstories', 0.5, itemIDs[0])
 
       this.getItems(itemIDs.slice(0, 90)).then(items => {
         const baseVal = HackerNewsAuralizer.storiesPerHour(items, 90, now)
         const curVal = HackerNewsAuralizer.storiesPerHour(items, 30, now)
 
         console.log(`[HN] ${curVal.toFixed(2)}/${baseVal.toFixed(2)} stories per hour`)
-        this.signal(SignalType.STATE, 'story-frequency', curVal / (baseVal * 2))
+        this.signal(SignalType.STATE, 'story-frequency', curVal / (baseVal * 2), items[0].time)
       })
     })
 
     this.hn.child('topstories').on('value', snapshot => {
-      const now = Date.now()
-
-      this.signal(SignalType.EVENT, 'topstories', 0.5)
-
       const itemIDs = snapshot.val()
       if (!itemIDs || !itemIDs.length) return
 
-      this.getItems(itemIDs.slice(0, 90)).then(items => {
-        const baseVal = HackerNewsAuralizer.pointsPerHour(items, 90, now)
-        const curVal = HackerNewsAuralizer.pointsPerHour(items, 30, now)
+      this.signal(SignalType.EVENT, 'topstories', 0.5, itemIDs[0])
 
-        console.log(`[HN] ${curVal.toFixed(2)}/${baseVal.toFixed(2)} points per hour`)
-        this.signal(SignalType.STATE, 'points-frequency', curVal / (baseVal * 2))
+      this.getItems(itemIDs.slice(0, 30)).then(items => {
+        this.topStories = items
+        this.updateTrend()
+      })
+    })
+
+    this.hn.child('beststories').on('value', snapshot => {
+      const itemIDs = snapshot.val()
+      if (!itemIDs || !itemIDs.length) return
+
+      this.signal(SignalType.EVENT, 'beststories', 0.5, itemIDs[0])
+
+      this.getItems(itemIDs.slice(0, 90)).then(items => {
+        this.bestStories = items
+        this.updateTrend()
       })
     })
 
@@ -53,10 +62,10 @@ class HackerNewsAuralizer extends IAuralizer {
       const deltaMS = now - lastUpdate
       lastUpdate = now
 
-      this.signal(SignalType.EVENT, 'updates', 0.5)
-
       const itemIDs = snapshot.val().items
       if (!itemIDs || !itemIDs.length) return
+
+      this.signal(SignalType.EVENT, 'updates', 0.5, itemIDs[0])
 
       this.getItems(itemIDs).then(items => {
         const sorted = {
@@ -98,8 +107,24 @@ class HackerNewsAuralizer extends IAuralizer {
     })
   }
 
+  updateTrend () {
+    if (!this.topStories || !this.bestStories) return
+
+    // Count the number of top stories that appear in the best stories list
+    const bestSet = new Set(this.bestStories.map(item => item.id))
+    const count = this.topStories.filter(item => bestSet.has(item.id)).length
+    console.log(`[HN] ${count}/${this.topStories.length} front page stories appear in recent best`)
+
+    // Full intensity if 1/3 or more of /topstories have made it to the last
+    // few pages of /beststories
+    const intensity = count / (this.topStories.length / 3)
+    this.signal(SignalType.STATE, 'popular-stories', intensity, count)
+  }
+
   getItems (itemIDs) {
-    return Promise.all(itemIDs.map(id => this.getItem(id)))
+    return Promise
+    .all(itemIDs.map(id => this.getItem(id)))  // Retrieve all items in parallel
+    .then(items => items.filter(item => item)) // Remove missing entries
   }
 
   getItem (itemID) {
@@ -127,8 +152,8 @@ class HackerNewsAuralizer extends IAuralizer {
     signals = Utils.shuffled(signals)
     const spacing = deltaMS / signals.length
 
-    signals.forEach(s => {
-      const randMS = spacing + this.prng.random() * deltaMS - spacing * 0.5
+    signals.forEach((s, i) => {
+      const randMS = Math.max(0, spacing * i + this.prng.random() * deltaMS - spacing * 0.5)
       setTimeout(() => this.signal(s.type, s.signal, s.intensity, s.hash), randMS)
     })
   }
@@ -142,20 +167,9 @@ class HackerNewsAuralizer extends IAuralizer {
 
     return count / hours
   }
-
-  static pointsPerHour (items, windowSize, now) {
-    if (!items.length) return 0
-
-    const count = Math.min(windowSize, items.length)
-    const oldest = items[count - 1].time * 1000
-    const points = items.slice(0, count).reduce((sum, item) => sum + (item.score || 0), 0)
-    const hours = (now - oldest) / (1000 * 60 * 60)
-
-    return points / hours
-  }
 }
 
 HackerNewsAuralizer.EVENTS = [ 'jobs', 'stories', 'comments', 'polls',
-  'topstories', 'newstories', 'updates' ]
-HackerNewsAuralizer.HEARTBEATS = [] // TODO: topstories/newstories/updates should be heartbeats
-HackerNewsAuralizer.STATES = [ 'story-frequency', 'points-frequency' ]
+  'topstories', 'beststories', 'newstories', 'updates' ]
+HackerNewsAuralizer.HEARTBEATS = [] // TODO: updates should be a heartbeat
+HackerNewsAuralizer.STATES = [ 'story-frequency', 'popular-stories' ]
