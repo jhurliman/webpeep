@@ -19,6 +19,8 @@ class EventSound extends ISound {
   }
 
   play (intensity = 0.5, hash = 0) {
+    console.log(`[EventSound] ${this.name} gain=${intensity} hash=${hash}`)
+
     // Convert hash into a position in our unit cube world
     const prng = new MersenneTwister(hash)
     const origin = { x: prng.random() - 0.5, y: 0, z: prng.random() - 0.5 }
@@ -27,7 +29,6 @@ class EventSound extends ISound {
     const segments = this.playableSegments()
     if (!segments.length) return console.warn(`Did not play EventSound ${this.name}, no loaded segments`)
 
-    console.log(`[EventSound] ${this.name} count=${segments.length} gain=${intensity}`)
     EventSound.playOneShot(this.audioCtx, segments, intensity, origin)
   }
 

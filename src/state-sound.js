@@ -24,6 +24,11 @@ class StateSound extends ISound {
   }
 
   play (intensity = 0.5, hash = 0) {
+    console.log(`[StateSound] ${this.name} gain=${intensity} hash=${hash}`)
+    this.doPlay(intensity, hash)
+  }
+
+  doPlay (intensity, hash) {
     // Remove already played segments
     const curTime = audioCtx.currentTime
     while (this.sources.length && this.sources[0].endTime <= curTime)
@@ -58,7 +63,7 @@ class StateSound extends ISound {
     // Run this method again right after the current segment finishes to
     // schedule another segment
     clearTimeout(this.timer)
-    this.timer = setTimeout(() => { this.play(intensity, hash) },
+    this.timer = setTimeout(() => { this.doPlay(intensity, hash) },
       (curSource.endTime - curTime + 0.1) * 1000)
   }
 
