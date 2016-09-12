@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   library.load(audioCtx).then(() => {
     // Load an auralizer
     auralizer = new HackerNewsAuralizer()
+    // auralizer = new RandomAuralizer()
 
     // Create a signal mapper to map auralizer signals to audio resources
     signalMapper = new RandomSignalMapper(auralizer, library)
