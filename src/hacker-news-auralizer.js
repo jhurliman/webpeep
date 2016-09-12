@@ -8,7 +8,6 @@ class HackerNewsAuralizer extends IAuralizer {
     const config = { databaseURL: 'https://hacker-news.firebaseio.com' }
     this.hn = firebase.initializeApp(config, 'hackernews').database().ref('v0')
     this.itemCache = new LRUCache({ capacity: 1000 })
-    this.prng = new MersenneTwister()
     this.topStories = null
     this.bestStories = null
 
@@ -153,7 +152,7 @@ class HackerNewsAuralizer extends IAuralizer {
     const spacing = deltaMS / signals.length
 
     signals.forEach((s, i) => {
-      const randMS = Math.max(0, spacing * i + this.prng.random() * deltaMS - spacing * 0.5)
+      const randMS = Math.max(0, spacing * i + Utils.prng.random() * deltaMS - spacing * 0.5)
       setTimeout(() => this.signal(s.type, s.signal, s.intensity, s.hash), randMS)
     })
   }

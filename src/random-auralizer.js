@@ -5,8 +5,6 @@ class RandomAuralizer extends IAuralizer {
   get stateSignals () { return RandomAuralizer.STATES }
 
   start () {
-    this.prng = new MersenneTwister()
-
     this.eventTick()
     this.heartbeatTick()
     this.stateTick()
@@ -18,11 +16,11 @@ class RandomAuralizer extends IAuralizer {
 
   tick (type, array, method) {
     const signal = array[Utils.randomInt(0, array.length - 1)]
-    const intensity = this.prng.random()
+    const intensity = Utils.prng.random()
     const hash = 0
     if (this.callback) this.callback(type, signal, intensity, hash)
 
-    setTimeout(method.bind(this), this.prng.random() * 1000 * 10)
+    setTimeout(method.bind(this), Utils.prng.random() * 1000 * 10)
   }
 }
 

@@ -3,10 +3,9 @@ class RandomSignalMapper extends ISignalMapper {
   constructor (auralizer, library) {
     super (auralizer, library)
 
-    const prng = new MersenneTwister()
-    const rand1 = prng.randomInt()
-    const rand2 = prng.randomInt()
-    const rand3 = prng.randomInt()
+    const rand1 = Utils.prng.randomInt()
+    const rand2 = Utils.prng.randomInt()
+    const rand3 = Utils.prng.randomInt()
 
     auralizer.eventSignals.forEach((signal, i, signals) => {
       this.maps.event[signal] = [ library.eventSounds[(rand1 + i) % library.eventSounds.length] ]
