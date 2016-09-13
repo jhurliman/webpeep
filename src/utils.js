@@ -1,5 +1,6 @@
+import MersenneTwister from './mersenne-twister'
 
-class Utils {
+export default class Utils {
   static fileExtension (path) {
     const match = path.match(/\.[^.]+$/)
     return match ? match[0] : undefined

@@ -1,5 +1,10 @@
+import EventSound from './event-sound'
+import HeartbeatSound from './heartbeat-sound'
+import StateSound from './state-sound'
+import Utils from './utils'
+import LibraryParser from './library-parser'
 
-class AudioLibrary {
+export default class AudioLibrary {
   constructor (indexUrls, options = {}) {
     this.indexUrls = indexUrls
     this.options = options
@@ -26,7 +31,7 @@ class AudioLibrary {
     const baseUrl = url.replace(/__INDEX__$/, '')
 
     data = data.replace(/<!--[\s\S]*-->/g, '') // Strip comments
-    const parsed = libraryParser.parse(data)
+    const parsed = LibraryParser.parse(data)
 
     parsed.forEach(dataEntry => {
       const libraryEntry = {}

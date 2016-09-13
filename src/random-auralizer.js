@@ -1,5 +1,8 @@
+import IAuralizer from './iauralizer'
+import SignalType from './signal-type'
+import Utils from './utils'
 
-class RandomAuralizer extends IAuralizer {
+export default class RandomAuralizer extends IAuralizer {
   get eventSignals () { return RandomAuralizer.EVENTS }
   get heartbeatSignals () { return RandomAuralizer.HEARTBEATS }
   get stateSignals () { return RandomAuralizer.STATES }

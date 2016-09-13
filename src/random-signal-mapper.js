@@ -1,5 +1,7 @@
+import ISignalMapper from './isignal-mapper'
+import Utils from './utils'
 
-class RandomSignalMapper extends ISignalMapper {
+export default class RandomSignalMapper extends ISignalMapper {
   constructor (auralizer, library) {
     super (auralizer, library)
 

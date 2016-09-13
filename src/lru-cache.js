@@ -1,5 +1,5 @@
 
-class LRUCache {
+export default class LRUCache {
   constructor (options = {}) {
     this._map = {}
     this._queue = {}

@@ -1,5 +1,9 @@
+import AudioResource from './audio-resource'
+import ISound from './isound'
+import MersenneTwister from './mersenne-twister'
+import Utils from './utils'
 
-class EventSound extends ISound {
+export default class EventSound extends ISound {
   constructor (audioCtx, libraryEntry) {
     super(audioCtx, libraryEntry)
 

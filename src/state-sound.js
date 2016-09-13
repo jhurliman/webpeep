@@ -1,10 +1,18 @@
+import AudioResource from './audio-resource'
+import ISound from './isound'
+import Utils from './utils'
 
-class StateSound extends ISound {
+export default class StateSound extends ISound {
   constructor (audioCtx, libraryEntry) {
     super(audioCtx, libraryEntry)
 
     const count = Math.max(1, parseInt(libraryEntry.segments, 10) || 0)
     const ext = libraryEntry.fileExtension || ''
+
+    // Create a shared gain node for this StateSound so we can adjust intensity
+    // without touching fade-in / fade-out curves
+    this.stateGain = audioCtx.createGain()
+    this.stateGain.connect(audioCtx.masterVolume)
 
     this.name = libraryEntry.name
     this.segments = Array.apply(null, Array(count)).map((_, i) => {
@@ -17,11 +25,6 @@ class StateSound extends ISound {
     })
     this.sources = []
     this.timer = null
-
-    // Create a shared gain node for this StateSound so we can adjust intensity
-    // without touching fade-in / fade-out curves
-    this.stateGain = audioCtx.createGain()
-    this.stateGain.connect(audioCtx.masterVolume)
   }
 
   load () {
@@ -35,7 +38,7 @@ class StateSound extends ISound {
 
   doPlay (intensity, hash) {
     // Remove already played segments
-    const curTime = audioCtx.currentTime
+    const curTime = this.audioCtx.currentTime
     while (this.sources.length && this.sources[0].endTime <= curTime)
       this.sources.shift()
 

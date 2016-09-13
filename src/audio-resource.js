@@ -1,5 +1,6 @@
+import Utils from './utils'
 
-class AudioResource {
+export default class AudioResource {
   constructor (audioCtx, url) {
     this.audioCtx = audioCtx
     this.url = url

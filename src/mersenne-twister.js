@@ -6,7 +6,7 @@
  * ES6 port by John Hurliman (jhurliman@jhurliman.org)
  */
 
-class MersenneTwister {
+export default class MersenneTwister {
   constructor(seed) {
     if (seed == undefined) seed = new Date().getTime()
 

@@ -1,5 +1,9 @@
+import IAuralizer from './iauralizer'
+import LRUCache from './lru-cache'
+import SignalType from './signal-type'
+import Utils from './utils'
 
-class HackerNewsAuralizer extends IAuralizer {
+export default class HackerNewsAuralizer extends IAuralizer {
   get eventSignals () { return HackerNewsAuralizer.EVENTS }
   get heartbeatSignals () { return HackerNewsAuralizer.HEARTBEATS }
   get stateSignals () { return HackerNewsAuralizer.STATES }

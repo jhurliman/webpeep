@@ -1,0 +1,38 @@
+{
+  "name": "webpeep",
+  "version": "1.0.0",
+  "description": "A pluggable auralizer for the web",
+  "scripts": {
+    "compile": "./node_modules/.bin/webpack src dist/webpeep.js",
+    "prepublish": "npm run compile",
+    "start": "npm run compile && ./node_modules/.bin/serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhurliman/webpeep.git"
+  },
+  "keywords": [
+    "peep",
+    "web",
+    "audio",
+    "audio",
+    "sound",
+    "ambient",
+    "firebase",
+    "hackernews"
+  ],
+  "author": "John Hurliman <http://jhurliman.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhurliman/webpeep/issues"
+  },
+  "homepage": "https://jhurliman.github.io/webpeep/",
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-babili": "0.0.2",
+    "babel-preset-modern": "^1.1.0",
+    "serve": "^1.4.0",
+    "webpack": "^1.13.2"
+  }
+}

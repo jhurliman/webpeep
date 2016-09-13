@@ -1,3 +1,7 @@
+import AudioLibrary from './audio-library'
+import HackerNewsAuralizer from './hacker-news-auralizer'
+import RandomSignalMapper from './random-signal-mapper'
+import SignalType from './signal-type'
 
 const LIBRARY_URLS = [
   'https://d1b1y29frn0aw8.cloudfront.net/wetlands/coupled/__INDEX__',

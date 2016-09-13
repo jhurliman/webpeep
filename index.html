@@ -6,145 +6,8 @@
   <title>Webpeep</title>
   <meta name="description" content="Web/JavaScript port of the Peep Network Auralizer">
   <meta name="author" content="John Hurliman">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <style>
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #fff;
-  text-align: center;
-  background-color: #159957;
-  background-image: linear-gradient(120deg, #159957, #15578E);
-  background-size: 200%;
-  background-position-x: 50%;
-  transition: all 5s ease-in-out;
-}
-
-.project-name {
-  font-size: 3.25em;
-  margin: 0.67em 0;
-  margin-top: 0;
-  margin-bottom: 0.1rem;
-}
-
-.project-tagline {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  font-weight: normal;
-  opacity: 0.7;
-}
-
-.page-footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 1rem;
-  margin-right: 2rem;
-}
-
-.page-footer h5 {
-  font-size: 0.9rem;
-  font-weight: normal;
-}
-
-.page-footer h5 span {
-  opacity: 0.45;
-}
-
-.page-footer h5 a {
-  color: white;
-  opacity: 0.7;
-  text-decoration: none;
-}
-
-a {
-  color: #1e6bb8;
-  text-decoration: none; }
-  a:hover {
-    text-decoration: underline; }
-
-.btn {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 0.3rem;
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
-  .btn + .btn {
-    margin-left: 1rem; }
-
-.btn:hover {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3); }
-
-@media screen and (min-width: 64em) {
-  .btn {
-    padding: 0.75rem 1rem; } }
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-  .btn {
-    padding: 0.6rem 0.9rem;
-    font-size: 0.9rem; } }
-
-@media screen and (max-width: 42em) {
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 0.9rem; }
-    .btn + .btn {
-      margin-top: 1rem;
-      margin-left: 0; } }
-
-@media screen and (min-width: 64em) {
-  .page-header {
-    padding: 5rem 6rem; } }
-
-@media screen and (min-width: 42em) and (max-width: 64em) {
-  .page-header {
-    padding: 3rem 4rem; } }
-
-@media screen and (max-width: 42em) {
-  .page-header {
-    padding: 2rem 1rem; } }
-
-.mute {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-}
-
-.mute-div {
-  top: 2rem;
-  right: 2rem;
-}
-
-#unmute-button {
-  display: none;
-}
-
-  </style>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+  <link href="css/webpeep.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -167,29 +30,8 @@ a {
     <h5><span>created by</span> <a href="http://jhurliman.org/" title="jhurliman.org" target="_blank">jhurliman</a></h5>
   </section>
 
-  <script src="src/mersenne-twister.js"></script>
-  <script src="src/lru-cache.js"></script>
-  <script src="src/utils.js"></script>
-
-  <script src="src/library-parser.js"></script>
-  <script src="src/audio-resource.js"></script>
-  <script src="src/audio-library.js"></script>
-
-  <script src="src/isound.js"></script>
-  <script src="src/event-sound.js"></script>
-  <script src="src/heartbeat-sound.js"></script>
-  <script src="src/state-sound.js"></script>
-
-  <script src="src/iauralizer.js"></script>
-  <script src="src/hacker-news-auralizer.js"></script>
-  <script src="src/random-auralizer.js"></script>
-
-  <script src="src/isignal-mapper.js"></script>
-  <script src="src/random-signal-mapper.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
-
-  <script src="src/index.js"></script>
+  <script src="dist/webpeep.js"></script>
 </body>
 </html>

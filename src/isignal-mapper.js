@@ -1,5 +1,5 @@
 
-class ISignalMapper {
+export default class ISignalMapper {
   constructor (auralizer, library) {
     this.auralizer = auralizer
     this.library = library

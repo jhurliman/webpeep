@@ -1,20 +1,10 @@
-/**
- * Enum for signal types an auralizer can emit.
- * @readonly
- * @enum {string}
- */
-const SignalType = {
-  EVENT: 'event',
-  HEARTBEAT: 'heartbeat',
-  STATE: 'state',
-}
 
 /**
  * IAuralizer is a base class for auralizers which connect to external data
  * sources and emit signals that can be interpreted by the rest of the
  * application.
  */
-class IAuralizer {
+export default class IAuralizer {
   get eventSignals () { return [] }
   get heartbeatSignals () { return [] }
   get stateSignals () { return [] }

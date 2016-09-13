@@ -1,5 +1,6 @@
+import ISound from './isound'
 
-class HeartbeatSound extends ISound {
+export default class HeartbeatSound extends ISound {
   constructor (audioCtx, libraryEntry) {
     super(audioCtx, libraryEntry)
   }

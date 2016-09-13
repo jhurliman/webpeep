@@ -1,5 +1,5 @@
 
-class ISound {
+export default class ISound {
   constructor (audioCtx, libraryEntry) {
     this.audioCtx = audioCtx
     this.duration = Number((libraryEntry.length || '').split(' ').shift()) || undefined
