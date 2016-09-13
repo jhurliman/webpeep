@@ -61,4 +61,10 @@ function setupUI () {
     unmuteButton.style.display = 'none'
     audioCtx.masterVolume.gain.value = 1
   })
+
+  document.addEventListener('play-sound', e => {
+    if (e.detail.type === SignalType.STATE) {
+      document.body.style.backgroundPositionX = (e.detail.intensity * 100) + '%'
+    }
+  })
 }

@@ -31,6 +31,12 @@ class ISignalMapper {
     intensity = Math.max(0, Math.min(1, intensity)) || 0
     hash = Number(hash) || 0
 
+    // Broadcast an event
+    const event = new CustomEvent('play-sound',
+      { detail: { type: type, signal: signal, intensity: intensity, hash: hash } })
+    document.dispatchEvent(event)
+
+    // Play the sound
     sound.play(intensity, hash)
   }
 }
