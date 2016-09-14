@@ -4,10 +4,10 @@ import RandomSignalMapper from './random-signal-mapper'
 import SignalType from './signal-type'
 
 const LIBRARY_URLS = [
-  'https://d1b1y29frn0aw8.cloudfront.net/wetlands/coupled/__INDEX__',
-  'https://d1b1y29frn0aw8.cloudfront.net/wetlands/events/__INDEX__',
-  'https://d1b1y29frn0aw8.cloudfront.net/wetlands/heartbeats/__INDEX__',
-  'https://d1b1y29frn0aw8.cloudfront.net/wetlands/states/__INDEX__',
+  '/sounds/wetlands/coupled/__INDEX__',
+  '/sounds/wetlands/events/__INDEX__',
+  '/sounds/wetlands/heartbeats/__INDEX__',
+  '/sounds/wetlands/states/__INDEX__',
 ]
 
 let audioCtx
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Create a library that will act as a database of available sounds. If
   // fileExtension is not specified, raw audio will be loaded (PCM S16LE)
-  library = new AudioLibrary(LIBRARY_URLS, { fileExtension: '.m4a' })
+  library = new AudioLibrary(LIBRARY_URLS, { fileExtension: null })
 
   // Load the library index files
   library.load(audioCtx).then(() => {
