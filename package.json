@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A pluggable auralizer for the web",
   "scripts": {
-    "compile": "./node_modules/.bin/webpack src dist/webpeep.js",
-    "prepublish": "npm run compile",
-    "start": "npm run compile && ./node_modules/.bin/serve"
+    "build": "./node_modules/.bin/webpack src dist/webpeep.js",
+    "prepublish": "npm run build",
+    "start": "npm run build && ./node_modules/.bin/serve"
   },
   "repository": {
     "type": "git",
