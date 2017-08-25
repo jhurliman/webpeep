@@ -1,0 +1,92 @@
+<!--
+This index file contains descriptions of the sound files
+located in the current directory for use with
+Peep: the network auralizer.
+
+The sound files included with Peep are:
+Copyright (C) 2000 Michael Gilfix and Alva Couch.
+
+The structure of the tags used is:
+
+For a single event (length and segments are optional):
+
+<event>
+	<name> Name goes here </name>
+	<length> length in "# sec" </length>
+	<segments> How many sound files for the event </segments>
+	<suggested>
+		The kind of network event to use the sound for.
+	</suggested>
+	<description>
+		A description of the event.
+	</description>
+</event>
+
+For coupled events:
+<couple>
+	<primary> The primary coupled sound </primary>
+	<secondary> The second, complementary sound </secondary>
+	<description>
+		A description of the event.
+	</description>
+</couple>
+
+For state events:
+<state>
+	<name> Name goes here </name>
+	<segments> Number of sound segments to load for a state </segments>
+	<description>
+		A description of the event.
+	</description>
+</state>
+
+For a heartbeat sound:
+<heartbeat>
+	... Same internal structure as an event
+</heartbeat>
+-->
+
+<!-- -------------------------------------------------------- -->
+
+<event>
+	<name>bells</name>
+	<segments>4</segments>
+	<description>
+		The short "tink" sound of several types of bells.
+	</description>
+</event>
+
+<event>
+	<name>door</name>
+	<description>
+		A wooden door closing.
+	</description>
+</event>
+
+<event>
+	<name>doorbell</name>
+	<description>
+		A doorbell ringing.
+	</description>
+</event>
+
+<event>
+	<name>tink</name>
+	<description>
+		The sound of a light peble hitting a metal surface.
+	</description>
+</event>
+
+<event>
+	<name>rooster</name>
+	<description>
+		A rooster crow.
+	</description>
+</event>
+
+<event>
+	<name>goose</name>
+	<description>
+		Several clucks from a goose.
+	</description>
+</event>

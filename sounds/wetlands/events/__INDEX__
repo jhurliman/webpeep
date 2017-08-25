@@ -1,0 +1,341 @@
+<!--
+This index file contains descriptions of the sound files
+located in the current directory for use with
+Peep: the network auralizer.
+
+The sound files included with Peep are:
+Copyright (C) 2000 Michael Gilfix and Alva Couch.
+
+The structure of the tags used is:
+
+For a single event (length and segments are optional):
+
+<event>
+	<name> Name goes here </name>
+	<length> length in "# sec" </length>
+	<segments> How many sound files for the event </segments>
+	<suggested>
+		The kind of network event to use the sound for.
+	</suggested>
+	<description>
+		A description of the event.
+	</description>
+</event>
+
+For coupled events:
+<couple>
+	<primary> The primary coupled sound </primary>
+	<secondary> The second, complementary sound </secondary>
+	<description>
+		A description of the event.
+	</description>
+</couple>
+
+For state events:
+<state>
+	<name> Name goes here </name>
+	<segments> Number of sound segments to load for a state </segments>
+	<description>
+		A description of the event.
+	</description>
+</state>
+
+For a heartbeat sound:
+<heartbeat>
+	... Same internal structure as an event
+</heartbeat>
+-->
+
+<!-- -------------------------------------------------------- -->
+
+<event>
+	<name>redwing-blackbird-01</name>
+	<length>2.8 sec</length>
+	<description>
+		3 quick chirps followed by a long call.
+	</description>
+</event>
+
+<event>
+	<name>redwing-blackbird-02</name>
+	<length>1.1 sec</length>
+	<description>
+		Quick blackbird chirp.
+	</description>
+</event>
+
+<event>
+	<name>redwing-blackbird-03</name>
+	<length>0.1 sec</length>
+	<description>
+		A single fast blackbird chirp.
+	</description>
+</event>
+
+<event>
+	<name>cardinal-01</name>
+	<length>0.3 sec</length>
+	<description>
+		A single shrill, high-pitched chirp form a cardinal.
+	</description>
+</event>
+
+<event>
+	<name>cardinal-02</name>
+	<length>0.9 sec</length>
+	<description>
+		A sequence of four quick throaty chirps.
+	</description>
+</event>
+
+<event>
+	<name>cardinal-03</name>
+	<length>0.75 sec</length>
+	<description>
+		Two loud cardinal chirps.
+	</description>
+</event>
+
+<event>
+	<name>mourning-dove-01</name>
+	<length>0.4 sec</length>
+	<description>
+		One loud hoot. Similar to an owl's hoot but deeper.
+	</description>
+</event>
+
+<event>
+	<name>redwing-blackbird-04</name>
+	<length>0.09 sec</length>
+	<description>
+		A very quick chirp.
+	</description>
+</event>
+
+<event>
+	<name>light-hoot-01</name>
+	<length>0.12 sec</length>
+	<description>
+		A quick light hoot. Sounds like an owl.
+	</description>
+</event>
+
+<event>
+	<name>hermit-thrush-01</name>
+	<length>1.15 sec</length>
+	<description>
+		A very high-pitched, metallic-sounding warble.
+	</description>
+</event>
+
+<event>
+	<name>mourning-dove-02</name>
+	<length>4.9 sec</length>
+	<description>
+		A long hoot-like call from a mourning dove.
+	</description>
+</event>
+
+<event>
+	<name>throaty-chirp</name>
+	<length>0.16 sec</length>
+	<description>
+		A throaty sounding single chirp.
+	</description>
+</event>
+
+<event>
+	<name>thrush-01</name>
+	<length>1.20 sec</length>
+	<description>
+		The onomatopia of "zooming".
+	</description>
+</event>
+
+<event>
+	<name>cardinal-04</name>
+	<length>2.2 sec</length>
+	<description>
+		A quick chirp followed by several medium-length chirps.
+	</description>
+</event>
+
+<event>
+	<name>croak</name>
+	<segments>3</segments>
+	<description>
+		Several different frog croaking in a marsh.
+	</description>
+</event>
+
+<event>
+	<name>tap</name>
+	<description>
+		The sound of a bird tapping its beak on a window-pain.
+	</description>
+</event>
+
+<event>
+	<name>cleanpeep</name>
+	<description>
+		A single, clean sounding peep.
+	</description>
+</event>
+
+<event>
+	<name>redwing-blackbird-05</name>
+	<description>
+		The shrill, high call of a redwing blackbird.
+	</description>
+</event>
+
+<event>
+	<name>sigh</name>
+	<description>
+		A bird call that sounds like a person sighing.
+	</description>
+</event>
+
+<event>
+	<name>cardinal-05</name>
+	<description>
+		A long sequence of cardinal chirps.
+	</description>
+</event>
+
+<event>
+	<name>robin-01</name>
+	<description>
+		A bird that sounds similar to a monkey's chatter.
+	</description>
+</event>
+
+<event>
+	<name>robin-02</name>
+	<description>
+		A long, drawn-out call that sounds similar to a monkey's chatter.
+	</description>
+</event>
+
+<event>
+	<name>redwing-blackbird-06</name>
+	<description>
+		Two long, drawn out, shrill calls.
+	</description>
+</event>
+
+<event>
+	<name>jay-01</name>
+	<description>
+		A medium length caw. Sounds somewhat similar to a crow's call,
+		but has a much lighter sound.
+	</description>
+</event>
+
+<event>
+	<name>light-chirps-01</name>
+	<length>1.8 sec</length>
+	<description>
+		A quick sequence of light, high-pitched chirps. Reminiscent of
+		the background chatter of birds in the backyard.
+	</description>
+</event>
+
+<event>
+	<name>light-chirps-02</name>
+	<length>1.6 sec</length>
+	<description>
+		A long sequence of very high-pitched, quick chirps.
+	</description>
+</event>
+
+<event>
+	<name>light-chirps-03</name>
+	<length>1.1 sec</length>
+	<description>
+		A long sequence of very high-pitched, very short chirps.
+	</description>
+</event>
+
+<event>
+	<name>squeak-01</name>
+	<length>0.75 sec</length>
+	<description>
+		An angry, squeaky sounding chirp, followed by two short ones.
+	</description>
+</event>
+
+<event>
+	<name>squeak-02</name>
+	<length>0.24 sec</length>
+	<description>
+		A single, angry and squeaky sounding chirp.
+	</description>
+</event>
+
+<event>
+	<name>light-chirps-04</name>
+	<length>2.8 sec</length>
+	<description>
+		Several short and light calls followed by a longer, light-sounding
+		call of medium length.
+	</description>
+</event>
+
+<event>
+	<name>sing-song-01</name>
+	<length>2.2 sec</length>
+	<description>
+		Features a bird "sing songing", which is singing a song with
+		great variety in pitch, range, and type.
+	</description>
+</event>
+
+<event>
+	<name>robin-03</name>
+	<length>1.3 sec</length>
+	<description>
+		A whirring of throaty, monkey-like calls.
+	</description>
+</event>
+
+<event>
+	<name>light-chirps-05</name>
+	<length>2.2 sec</length>
+	<description>
+		A sequence of high-pitched chirps, followed by a longer, slightly
+		higher-pitched, and throatier chirp.
+	</description>
+</event>
+
+<event>
+	<name>metallic</name>
+	<length>0.42 sec</length>
+	<description>
+		A bird that sounds like metal being scraped.
+	</description>
+</event>
+
+<event>
+	<name>chatter-01</name>
+	<length>1.7 sec</length>
+	<description>
+		A sequence of rapid chatter.
+	</description>
+</event>
+
+<event>
+	<name>chatter-02</name>
+	<length>0.85 sec</length>
+	<description>
+		How you'd imagine a bird would sound after smoking for twenty years.
+	</description>
+</event>
+
+<event>
+	<name>chatter-03</name>
+	<length>0.5 sec</length>
+	<description>
+		A sequence of deep, throaty chatter.
+	</description>
+</event>

@@ -1,0 +1,57 @@
+<!--
+This index file contains descriptions of the sound files
+located in the current directory for use with
+Peep: the network auralizer.
+
+The sound files included with Peep are:
+Copyright (C) 2000 Michael Gilfix and Alva Couch.
+
+The structure of the tags used is:
+
+For a single event (length and segments are optional):
+
+<event>
+	<name> Name goes here </name>
+	<length> length in "# sec" </length>
+	<segments> How many sound files for the event </segments>
+	<suggested>
+		The kind of network event to use the sound for.
+	</suggested>
+	<description>
+		A description of the event.
+	</description>
+</event>
+
+For coupled events:
+<couple>
+	<primary> The primary coupled sound </primary>
+	<secondary> The second, complementary sound </secondary>
+	<description>
+		A description of the event.
+	</description>
+</couple>
+
+For state events:
+<state>
+	<name> Name goes here </name>
+	<segments> Number of sound segments to load for a state </segments>
+	<description>
+		A description of the event.
+	</description>
+</state>
+
+For a heartbeat sound:
+<heartbeat>
+	... Same internal structure as an event
+</heartbeat>
+-->
+
+<!-- -------------------------------------------------------- -->
+
+<heartbeat>
+	<name>cricket-chirp-01</name>
+	<length>0.25 sec</length>
+	<description>
+		A single cricket chirp.
+	</description>
+</heartbeat>

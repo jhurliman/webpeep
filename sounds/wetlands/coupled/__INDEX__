@@ -1,0 +1,74 @@
+<!--
+This index file contains descriptions of the sound files
+located in the current directory for use with
+Peep: the network auralizer.
+
+The sound files included with Peep are:
+Copyright (C) 2000 Michael Gilfix and Alva Couch.
+
+The structure of the tags used is:
+
+For a single event (length and segments are optional):
+
+<event>
+	<name> Name goes here </name>
+	<length> length in "# sec" </length>
+	<segments> How many sound files for the event </segments>
+	<suggested>
+		The kind of network event to use the sound for.
+	</suggested>
+	<description>
+		A description of the event.
+	</description>
+</event>
+
+For coupled events:
+<couple>
+	<primary> The primary coupled sound </primary>
+	<secondary> The second, complementary sound </secondary>
+	<description>
+		A description of the event.
+	</description>
+</couple>
+
+For state events:
+<state>
+	<name> Name goes here </name>
+	<segments> Number of sound segments to load for a state </segments>
+	<description>
+		A description of the event.
+	</description>
+</state>
+
+For a heartbeat sound:
+<heartbeat>
+	... Same internal structure as an event
+</heartbeat>
+-->
+
+<!-- -------------------------------------------------------- -->
+
+<couple>
+	<primary>peep-01a</primary>
+	<secondary>peep-01b</secondary>
+	<description>
+		Two short, clean sounding peeps that nicely complement each other.
+	</description>
+</couple>
+
+<couple>
+	<primary>peep-02a</primary>
+	<secondary>peep-02b</secondary>
+	<description>
+		Two clean sounding peeps that nicely complement each other.
+	</description>
+</couple>
+
+<couple>
+	<primary>whistle-01a</primary>
+	<secondary>whistle-01b</secondary>
+	<description>
+		Two complementary calls that contains a considerable amount of
+		natural reverb and have a whistling sort of quality.
+	</description>
+</couple>
