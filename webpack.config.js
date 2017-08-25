@@ -6,7 +6,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         query: {
-          presets: ['modern', 'modern/safari9', 'babili']
+          presets: ['modern-browsers', 'minify']
         }
       }
     ]
