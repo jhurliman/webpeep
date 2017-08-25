@@ -18,6 +18,8 @@
     "audio",
     "sound",
     "ambient",
+    "ambisonic",
+    "songbird",
     "firebase",
     "hackernews"
   ],
@@ -35,6 +37,7 @@
     "progress": "^2.0.0",
     "request": "^2.74.0",
     "serve": "^6.0.6",
+    "songbird-audio": "latest",
     "tar-fs": "^1.13.2",
     "webpack": "^3.5.5"
   }

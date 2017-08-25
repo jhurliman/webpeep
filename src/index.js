@@ -2,15 +2,17 @@ import AudioLibrary from './audio-library'
 import HackerNewsAuralizer from './hacker-news-auralizer'
 import RandomSignalMapper from './random-signal-mapper'
 import SignalType from './signal-type'
+import SongBird from 'songbird-audio'
 
 const LIBRARY_URLS = [
   '/sounds/wetlands/coupled/__INDEX__',
   '/sounds/wetlands/events/__INDEX__',
   '/sounds/wetlands/heartbeats/__INDEX__',
-  '/sounds/wetlands/states/__INDEX__',
+  '/sounds/wetlands/states/__INDEX__'
 ]
 
 let audioCtx
+let songbird
 let library
 let auralizer
 let signalMapper
@@ -18,6 +20,26 @@ let signalMapper
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize a web audio context
   audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+
+  const dimensions = { width: 3.1, height: 2.5, depth: 3.4 }
+  const materials = {
+    left: 'transparent',
+    right: 'transparent',
+    front: 'transparent',
+    back: 'brick-bare',
+    down: 'grass',
+    up: 'transparent'
+  }
+  const songbirdOpts = {
+    ambisonicOrder: 3,
+    listenerPosition: [0, 0, 0],
+    listenerForward: [1, 0, 0],
+    listenerUp: [0, 1, 0],
+    dimensions: dimensions,
+    materials: materials
+  }
+  window.songbird = songbird = new Songbird(audioCtx, songbirdOpts)
+  songbird.output.connect(audioCtx.destination)
 
   // Create a master volume knob
   audioCtx.masterVolume = audioCtx.createGain()
@@ -50,10 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-function setupUI () {
+function setupUI() {
   const muteButton = document.getElementById('mute-button')
   const unmuteButton = document.getElementById('unmute-button')
-  
+
   muteButton.addEventListener('click', () => {
     muteButton.style.display = 'none'
     unmuteButton.style.display = 'inherit'
@@ -68,7 +90,7 @@ function setupUI () {
 
   document.addEventListener('play-sound', e => {
     if (e.detail.type === SignalType.STATE) {
-      document.body.style.backgroundPositionX = (e.detail.intensity * 100) + '%'
+      document.body.style.backgroundPositionX = e.detail.intensity * 100 + '%'
     }
   })
 }
