@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize a web audio context
   audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 
+  // Create a master volume knob
+  audioCtx.masterVolume = audioCtx.createGain()
+  audioCtx.masterVolume.connect(audioCtx.destination)
+
+  // Create a Songbird 3D environment
   const dimensions = { width: 3.1, height: 2.5, depth: 3.4 }
   const materials = {
     left: 'transparent',
@@ -39,11 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     materials: materials
   }
   window.songbird = songbird = new Songbird(audioCtx, songbirdOpts)
-  songbird.output.connect(audioCtx.destination)
-
-  // Create a master volume knob
-  audioCtx.masterVolume = audioCtx.createGain()
-  audioCtx.masterVolume.connect(audioCtx.destination)
+  songbird.output.connect(audioCtx.masterVolume)
 
   // Create a library that will act as a database of available sounds. If
   // fileExtension is not specified, raw audio will be loaded (PCM S16LE)
