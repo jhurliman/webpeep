@@ -1,4 +1,3 @@
-
 /**
  * Enum for signal types an auralizer can emit.
  * @readonly
@@ -7,7 +6,7 @@
 const SignalType = {
   EVENT: 'event',
   HEARTBEAT: 'heartbeat',
-  STATE: 'state',
+  STATE: 'state'
 }
 
 export default SignalType

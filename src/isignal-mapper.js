@@ -1,19 +1,18 @@
-
 export default class ISignalMapper {
-  constructor (auralizer, library) {
+  constructor(auralizer, library) {
     this.auralizer = auralizer
     this.library = library
 
     this.maps = {
       event: {},
       heartbeat: {},
-      state: {},
+      state: {}
     }
 
     auralizer.signalHandler = this.signalHandler.bind(this)
   }
 
-  startLoadAudio () {
+  startLoadAudio() {
     Object.values(this.maps).forEach(map => {
       Object.values(map).forEach(sounds => {
         sounds.forEach(sound => sound.load())
@@ -21,10 +20,11 @@ export default class ISignalMapper {
     })
   }
 
-  signalHandler (type, signal, intensity, hash) {
+  signalHandler(type, signal, intensity, hash) {
     const map = this.maps[type]
     const sounds = map ? map[signal] : undefined
-    if (!sounds || !sounds.length) return console.warn(`Unmapped signal ${type}:${signal}`)
+    if (!sounds || !sounds.length)
+      return console.warn(`Unmapped signal ${type}:${signal}`)
 
     const sound = sounds[hash % sounds.length]
 
@@ -32,8 +32,9 @@ export default class ISignalMapper {
     hash = Number(hash) || 0
 
     // Broadcast an event
-    const event = new CustomEvent('play-sound',
-      { detail: { type: type, signal: signal, intensity: intensity, hash: hash } })
+    const event = new CustomEvent('play-sound', {
+      detail: { type: type, signal: signal, intensity: intensity, hash: hash }
+    })
     document.dispatchEvent(event)
 
     // Play the sound

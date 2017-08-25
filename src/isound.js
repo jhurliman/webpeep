@@ -1,12 +1,12 @@
-
 export default class ISound {
-  constructor (audioCtx, libraryEntry) {
+  constructor(audioCtx, libraryEntry) {
     this.audioCtx = audioCtx
-    this.duration = Number((libraryEntry.length || '').split(' ').shift()) || undefined
+    this.duration =
+      Number((libraryEntry.length || '').split(' ').shift()) || undefined
     this.description = libraryEntry.description
     this.suggested = libraryEntry.suggested
   }
 
-  load () { }
-  play (intensity = 0.5, hash = 0) { }
+  load() {}
+  play(intensity = 0.5, hash = 0) {}
 }

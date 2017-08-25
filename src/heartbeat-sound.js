@@ -1,15 +1,11 @@
 import ISound from './isound'
 
 export default class HeartbeatSound extends ISound {
-  constructor (audioCtx, libraryEntry) {
+  constructor(audioCtx, libraryEntry) {
     super(audioCtx, libraryEntry)
   }
 
-  load () {
+  load() {}
 
-  }
-
-  play (intensity = 0.5, hash = 0) {
-
-  }
+  play(intensity = 0.5, hash = 0) {}
 }

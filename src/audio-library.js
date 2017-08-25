@@ -5,7 +5,7 @@ import Utils from './utils'
 import LibraryParser from './library-parser'
 
 export default class AudioLibrary {
-  constructor (indexUrls, options = {}) {
+  constructor(indexUrls, options = {}) {
     this.indexUrls = indexUrls
     this.options = options
     this.coupledSounds = []
@@ -14,20 +14,24 @@ export default class AudioLibrary {
     this.stateSounds = []
   }
 
-  load (audioCtx) {
+  load(audioCtx) {
     return Promise.all(
-      this.indexUrls.map(url => Utils.request(url)
-        .then(data => this.parseIndexFile(audioCtx, data, url)))
+      this.indexUrls.map(url =>
+        Utils.request(url).then(data =>
+          this.parseIndexFile(audioCtx, data, url)
+        )
+      )
     ).then(() => {
       console.log(
         `Loaded ${this.coupledSounds.length} coupled sounds, ` +
-        `${this.eventSounds.length} event sounds, ` +
-        `${this.heartbeatSounds.length} heartbeat sounds, ` +
-        `and ${this.stateSounds.length} state sounds`)
+          `${this.eventSounds.length} event sounds, ` +
+          `${this.heartbeatSounds.length} heartbeat sounds, ` +
+          `and ${this.stateSounds.length} state sounds`
+      )
     })
   }
 
-  parseIndexFile (audioCtx, data, url) {
+  parseIndexFile(audioCtx, data, url) {
     const baseUrl = url.replace(/__INDEX__$/, '')
 
     data = data.replace(/<!--[\s\S]*-->/g, '') // Strip comments
@@ -35,9 +39,12 @@ export default class AudioLibrary {
 
     parsed.forEach(dataEntry => {
       const libraryEntry = {}
-      dataEntry.content.forEach(property => libraryEntry[property.name] = property.content)
+      dataEntry.content.forEach(
+        property => (libraryEntry[property.name] = property.content)
+      )
       libraryEntry.baseUrl = baseUrl
-      if (this.options.fileExtension) libraryEntry.fileExtension = this.options.fileExtension
+      if (this.options.fileExtension)
+        libraryEntry.fileExtension = this.options.fileExtension
 
       switch (dataEntry.name) {
         case 'couple':

@@ -1,13 +1,18 @@
-
 /**
  * IAuralizer is a base class for auralizers which connect to external data
  * sources and emit signals that can be interpreted by the rest of the
  * application.
  */
 export default class IAuralizer {
-  get eventSignals () { return [] }
-  get heartbeatSignals () { return [] }
-  get stateSignals () { return [] }
+  get eventSignals() {
+    return []
+  }
+  get heartbeatSignals() {
+    return []
+  }
+  get stateSignals() {
+    return []
+  }
 
   /**
    * @callback IAuralizer~signalHandler
@@ -19,7 +24,9 @@ export default class IAuralizer {
    */
 
   /** @type {IAuralizer~signalHandler} */
-  set signalHandler (value) { this.callback = value }
+  set signalHandler(value) {
+    this.callback = value
+  }
 
-  start () {}
+  start() {}
 }
