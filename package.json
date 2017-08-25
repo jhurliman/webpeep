@@ -1,6 +1,6 @@
 {
   "name": "webpeep",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A pluggable auralizer for the web",
   "scripts": {
     "build": "./node_modules/.bin/webpack src dist/webpeep.js",
