@@ -38,7 +38,7 @@
     "request": "^2.74.0",
     "serve": "^6.0.6",
     "songbird-audio": "latest",
-    "tar-fs": "^1.13.2",
+    "tar-fs": "^1.16.5",
     "webpack": "^3.5.5"
   }
 }
